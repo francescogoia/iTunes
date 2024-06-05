@@ -11,4 +11,4 @@ class Album:
         return hash(self.AlbumId)
 
     def __str__(self):
-        return f"{self.AlbumId} - {self.Title}"
+        return f"{self.AlbumId} - {self.Title} - {self.totD}"

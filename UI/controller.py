@@ -62,4 +62,23 @@ class Controller:
         self._view.update_page()
 
     def handleGetSetAlbum(self, e):
-        pass
+        dTotText = self._view._txtInSoglia.value
+        try:
+            dTot = int(dTotText)
+        except ValueError:
+            warnings.warn("Soglia non intero")
+            self._view.txt_result.controls.append(ft.Text("Soglia inserita non valida, inserire un intero"))
+            return
+        if self._choiceAlbum is None:
+            warnings.warn("Album non selezionato")
+            self._view.txt_result.controls.append(ft.Text("Selezionare un album"))
+            return
+
+        setAlbum = self._model.get_set_album(self._choiceAlbum, dTot)
+        self._view.txt_result.controls.clear()
+        self._view.txt_result.controls.append(ft.Text(f"Set di album trovato"))
+        for s in setAlbum:
+            self._view.txt_result.controls.append(ft.Text(f"{s}"))
+
+        self._view.update_page()
+
